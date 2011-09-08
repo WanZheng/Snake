@@ -106,6 +106,8 @@ public class SnakeView extends TileView {
     }
 
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
+	Log.d(MyTag.TAG, "onKeyDown()");
+
 	switch (keyCode) {
 	case KeyEvent.KEYCODE_DPAD_UP:
 	    if (mStatus == 0) {
@@ -152,5 +154,9 @@ public class SnakeView extends TileView {
 
     public void setStatusBar(TextView statusBar) {
 	mStatusBar = statusBar;
+    }
+
+    public void pause() {
+	mStatus = 0;
     }
 }

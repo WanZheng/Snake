@@ -2,10 +2,14 @@ package me.cos.snake;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class Snake extends Activity
 {
+    SnakeView mSnake;
+    TextView mStatusBar;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -13,9 +17,18 @@ public class Snake extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-	SnakeView snakeView = (SnakeView) findViewById(R.id.snake);
-	TextView statusBar = (TextView) findViewById(R.id.status);
+	mSnake = (SnakeView) findViewById(R.id.snake);
+	mStatusBar = (TextView) findViewById(R.id.status);
+	mSnake.setStatusBar(mStatusBar);
+    }
 
-	snakeView.setStatusBar(statusBar);
+    @Override protected void onPause() {
+	super.onPause();
+	mSnake.pause();
+    }
+
+    @Override protected void onResume() {
+	super.onResume();
+	mStatusBar.setVisibility(View.VISIBLE);
     }
 }
