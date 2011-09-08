@@ -12,10 +12,10 @@
       android:layout_height="match_parent">
     <TextView
 	android:id="@+id/status"
+	android:text="Press UP to start"
 	android:background="#888"
 	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content" 
-	android:text="Hello World, Snake"
 	android:gravity="center_horizontal"
 	android:layout_centerInParent="true"/>
   </RelativeLayout>

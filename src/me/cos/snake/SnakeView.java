@@ -7,11 +7,13 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.KeyEvent;
+import android.widget.TextView;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 
 public class SnakeView extends TileView {
+    private TextView mStatusBar;
     private ArrayList<Coordinate> mSnake = new ArrayList();
     private int mDirection;
 
@@ -23,6 +25,8 @@ public class SnakeView extends TileView {
     private static final int EAST = 1;
     private static final int SOUTH = 2;
     private static final int WEST = 3;
+
+    private int mStatus = 0;
 
     private int[][] mMoveTable = {
 	{0, -1}, {1, 0}, {0, 1}, {-1, 0}
@@ -79,11 +83,12 @@ public class SnakeView extends TileView {
     }
 
     private void update() {
-	clearTiles();
+	if (mStatus > 0) {
+	    clearTiles();
+	    updateSnake();
 
-	updateSnake();
-
-	mHandler.sleep(mMoveDelay);
+	    mHandler.sleep(mMoveDelay);
+	}
     }
 
     private void updateSnake() {
@@ -102,12 +107,17 @@ public class SnakeView extends TileView {
 
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
 	switch (keyCode) {
-	case KeyEvent.KEYCODE_DPAD_CENTER:
-	    initNewGame();
-	    update();
-	    return true;
 	case KeyEvent.KEYCODE_DPAD_UP:
-	    mDirection = NORTH;
+	    if (mStatus == 0) {
+		mStatus = 1;
+
+		initNewGame();
+		update();
+
+		mStatusBar.setVisibility(View.INVISIBLE);
+	    }else{
+		mDirection = NORTH;
+	    }
 	    return true;
 	case KeyEvent.KEYCODE_DPAD_DOWN:
 	    mDirection = SOUTH;
@@ -138,5 +148,9 @@ public class SnakeView extends TileView {
 	int getY() {
 	    return mY;
 	}
+    }
+
+    public void setStatusBar(TextView statusBar) {
+	mStatusBar = statusBar;
     }
 }
