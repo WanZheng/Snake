@@ -54,7 +54,7 @@ public class TileView2 extends SurfaceView implements SurfaceHolder.Callback{
     public void eraseTile(int x, int y) {
 	mCanvas.save();
 	mCanvas.clipRect(x, y, x+mTileSize, y+mTileSize+1); // XXX: why need to +1?
-	mCanvas.drawColor(0x80ffffff, PorterDuff.Mode.SRC);
+	mCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
 	mCanvas.restore();
 	Log.d(MyTag.TAG, "clear " + x + "," + y);
     }

@@ -18,8 +18,8 @@ public class Snake extends Activity
         setContentView(R.layout.main);
 
 	mSnake = (SnakeView2) findViewById(R.id.snake2);
-	mSnake.setZOrderOnTop(true);    // necessary
-	mSnake.getHolder().setFormat(android.graphics.PixelFormat.TRANSPARENT);
+	// mSnake.setZOrderOnTop(true);    // necessary
+	// mSnake.getHolder().setFormat(android.graphics.PixelFormat.TRANSPARENT);
 
 	mStatusBar = (TextView) findViewById(R.id.status);
 	mSnake.setStatusBar(mStatusBar);
