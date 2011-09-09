@@ -6,9 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.graphics.Color;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.graphics.drawable.Drawable;
+import android.graphics.PorterDuff;
 import android.util.Log;
 
 public class TileView2 extends SurfaceView implements SurfaceHolder.Callback{
@@ -50,7 +52,10 @@ public class TileView2 extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     public void eraseTile(int x, int y) {
-	mCanvas.drawRect(new Rect(x, y, x+mTileSize, y+mTileSize), mPaint);
+	mCanvas.save();
+	mCanvas.clipRect(x, y, x+mTileSize, y+mTileSize+1); // XXX: why need to +1?
+	mCanvas.drawColor(0x80ffffff, PorterDuff.Mode.SRC);
+	mCanvas.restore();
 	Log.d(MyTag.TAG, "clear " + x + "," + y);
     }
 

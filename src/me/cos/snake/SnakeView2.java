@@ -41,7 +41,7 @@ public class SnakeView2 extends TileView2 {
     private static final int WEST = 3;
 
     private int mStatus = 0;
-
+    private float mSpeed = 10.0f;
     private float[][] mMoveTable = {
 	{0, -0.1f}, {0.1f, 0}, {0, 0.1f}, {-0.1f, 0}
     };
@@ -62,6 +62,7 @@ public class SnakeView2 extends TileView2 {
 	loadTile(GREEN_STAR, r.getDrawable(R.drawable.greenstar));
 
 	setFocusable(true);
+	initNewGame();
     }
 
     private void initNewGame() {
@@ -105,8 +106,8 @@ public class SnakeView2 extends TileView2 {
 	synchronized (mLock) {
 	    movement = mMoveTable[mDirection];
 	}
-	head.mX += movement[0];
-	head.mY += movement[1];
+	head.mX += movement[0] * mSpeed;
+	head.mY += movement[1] * mSpeed;
     }
 
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -115,8 +116,7 @@ public class SnakeView2 extends TileView2 {
 	switch (keyCode) {
 	case KeyEvent.KEYCODE_DPAD_UP:
 	    if (mStatus == 0) {
-		mStatusBar.setVisibility(View.INVISIBLE);
-		initNewGame();
+		// mStatusBar.setVisibility(View.INVISIBLE);
 		startGame();
 	    }else{
 		setDirection(NORTH);
