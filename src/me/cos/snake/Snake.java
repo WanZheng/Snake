@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class Snake extends Activity
 {
-    SnakeView mSnake;
+    SnakeView2 mSnake;
     TextView mStatusBar;
 
     /** Called when the activity is first created. */
@@ -17,7 +17,7 @@ public class Snake extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-	mSnake = (SnakeView) findViewById(R.id.snake);
+	mSnake = (SnakeView2) findViewById(R.id.snake2);
 	mStatusBar = (TextView) findViewById(R.id.status);
 	mSnake.setStatusBar(mStatusBar);
     }
